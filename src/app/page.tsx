@@ -8,15 +8,21 @@ import { ReactTyped } from "react-typed";
 import AnimatedCard from "../components/animated/animated-card";
 import AboutMeArticle from "../components/atoms/about-me";
 import Footer from "../components/atoms/footer";
-import { ModeToggle } from "../components/theme-toggle";
 import TypographyHeading from "../components/typography/heading";
 import TypographyParagraph from "../components/typography/paragraph";
 import { Badge } from "../components/ui/badge";
 import { Button } from "../components/ui/button";
 import { CardContent, CardFooter, CardHeader } from "../components/ui/card";
 import Hyperlink from "../components/ui/hyperlink";
-import { FIRST_TAG, FULL_NAME, SECOND_TAG } from "../constants/name";
-import { MY_PROJECTS } from "../constants/projects";
+import {
+  FIFTH_TAG,
+  FIRST_TAG,
+  FOURTH_TAG,
+  FULL_NAME,
+  SECOND_TAG,
+  THIRD_TAG,
+} from "../constants/name";
+import { ACADEMIC_PROJECTS, MY_PROJECTS } from "../constants/projects";
 import { GITHUB_URL, LINKEDIN_URL, MAIL_URL, ROOT_URL } from "../constants/url";
 import { MY_EXPERIENCES } from "../definitions/experiences";
 import { Route } from "../definitions/routes";
@@ -36,7 +42,9 @@ export default function HomePage() {
     }
   };
 
-  const featuredProjects = MY_PROJECTS.filter((project) => project.isFeatured);
+  const featuredProjects = [...ACADEMIC_PROJECTS, ...MY_PROJECTS].filter(
+    (project) => project.isFeatured,
+  );
   const sortedExperiences = [...MY_EXPERIENCES]
     .filter((experience) => experience.isFeatured)
     .sort((a, b) => {
@@ -65,7 +73,13 @@ export default function HomePage() {
 
           <TypographyHeading className="pt-0 text-lg" level={2}>
             <ReactTyped
-              strings={[FIRST_TAG, SECOND_TAG]}
+              strings={[
+                FIRST_TAG,
+                SECOND_TAG,
+                THIRD_TAG,
+                FOURTH_TAG,
+                FIFTH_TAG,
+              ]}
               typeSpeed={40}
               backSpeed={40}
               loop
@@ -206,7 +220,7 @@ export default function HomePage() {
         </div>
         <Footer />
       </main>
-      <ModeToggle />
+      {/* <ModeToggle /> */}
     </>
   );
 }

@@ -7,7 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ArrowUpRightIcon, GamepadIcon, GraduationCapIcon } from "lucide-react";
+import { ArrowUpRightIcon, GraduationCapIcon } from "lucide-react";
 import TypographyHeading from "../../components/typography/heading";
 import { Button } from "../../components/ui/button";
 import Hyperlink from "../../components/ui/hyperlink";
@@ -77,9 +77,9 @@ export default function Page() {
             - use assets from v1
             - make animation to highlight this button
           */}
-        <Button variant="outline">
+        {/* <Button variant="outline">
           Give me a gamified view <GamepadIcon className="pl-1" />
-        </Button>
+        </Button> */}
       </div>
 
       <TypographyHeading className="p-10 pl-0">

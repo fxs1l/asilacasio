@@ -77,6 +77,16 @@ export const MY_PROJECTS: Project[] = [
 
 export const ACADEMIC_PROJECTS: Project[] = [
   {
+    name: "Traffic-Based Air Pollution Monitoring System for Urban Intersections ",
+    tags: ["Python", "YOLOv5", "OpenCV", "Raspberry Pi", "NodeJs", "NextJs"],
+    url: "https://traffic.upcare.live",
+    isFeatured: true,
+    startDate: new Date("2024-08"),
+    endDate: new Date("2025-05"),
+    description:
+      "Capstone project for my undergraduate Electronics Engineering degree at UPD. Built a responsive NextJS web app to visualize real-time air pollution and traffic data with a 3D digital twin for pollutant dispersion. Developed a CoAP server in NodeJS for IoT data ingestion and storage, and implemented a Python-based vehicle tracking system using YOLO and BoT-SORT. ",
+  },
+  {
     name: "StegaCipher",
     tags: ["Python", "Python/PIL"],
     url: "https://github.com/fxs1l/EEE-111-StegaCipher",
