@@ -84,7 +84,7 @@ export const ACADEMIC_PROJECTS: Project[] = [
     startDate: new Date("2024-08"),
     endDate: new Date("2025-05"),
     description:
-      "Capstone project for my undergraduate Electronics Engineering degree at UPD. Built a responsive NextJS web app to visualize real-time air pollution and traffic data with a 3D digital twin for pollutant dispersion. Developed a CoAP server in NodeJS for IoT data ingestion and storage, and implemented a Python-based vehicle tracking system using YOLO and BoT-SORT. ",
+      "Capstone project for my Electronics Engineering degree at UPD, recognized among the department’s Top 10 Best in Design and selected for presentation at IEEE-ICECS 2025. Developed a responsive NextJS web app to visualize real-time air pollution and traffic data via a 3D digital twin, alongside a CoAP server in NodeJS for IoT data ingestion and a Python-based vehicle tracking system using YOLO and BoT-SORT.",
   },
   {
     name: "StegaCipher",
@@ -111,5 +111,29 @@ export const ACADEMIC_PROJECTS: Project[] = [
     endDate: new Date("2022-01"),
     description:
       "Given different scenarios, compares the cost between Djikstra's and Prim's algorithm",
+  },
+  {
+    name: "Computer Networks Laboratory",
+    tags: ["Networking", "LAMP", "WordPress", "Wireshark", "GNS3", "Routing"],
+    startDate: new Date("2024-08"),
+    endDate: new Date("2024-12"),
+    description:
+      "Configured and hosted a WordPress instance using the LAMP stack on a virtual machine. Dissected protocol data units using Wireshark. Performed IPv4 addressing and routing in GNS3 and on physical routers.",
+  },
+  {
+    name: "Cloud Computing Laboratory",
+    tags: ["Cloud", "Oracle Cloud", "Virtualization", "VM", "Infrastructure"],
+    startDate: new Date("2024-01"),
+    endDate: new Date("2024-07"),
+    description:
+      "Configured and hosted a Virtual Machine (VM) in Oracle Cloud for lab testing and deployment. Gained hands-on experience in cloud infrastructure, virtualization concepts, and VM lifecycle management.",
+  },
+  {
+    name: "Landslide Alerting and Monitoring System",
+    tags: ["IoT", "ESP32", "C++", "ThingSpeak", "Google Sites"],
+    startDate: new Date("2024-02"),
+    endDate: new Date("2024-08"),
+    description:
+      "Designed and implemented an IoT-based landslide alerting system as part of laboratory coursework. Programmed ESP32 microcontrollers in C++ to collect vibration, acceleration, and soil moisture data and upload readings to ThingSpeak via REST APIs. Integrated ThingSpeak data to a Google Sites dashboard for real-time visualization and backup monitoring, and established alert conditions for manual incident review.",
   },
 ];
