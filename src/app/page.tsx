@@ -179,13 +179,13 @@ export default function HomePage() {
               </CardContent>
             </AnimatedCard>
           ))}
-          <Button
+          {/* <Button
             variant="outline"
             className="self-center"
             onClick={() => router.push(Route.EXPERIENCE)}
           >
             View my resume <ArrowUpRightIcon className="h-4 w-4" />
-          </Button>
+          </Button> */}
         </div>
         <div className="flex flex-col justify-center" ref={projectsRef}>
           <TypographyHeading className="p-10 pb-5 text-left text-2xl lg:text-4xl">
