@@ -2,7 +2,7 @@ export type Project = {
   name: string;
   image?: string;
   description: string;
-  url: string;
+  url?: string;
   videoUrl?: string;
   tags: string[];
   startDate: Date;

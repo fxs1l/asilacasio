@@ -45,21 +45,20 @@ export default function Page() {
 
       return (
         <TableRow key={name}>
-          <TableCell>
-            {" "}
-            {isActive ? "Ongoing" : endDate?.getFullYear()}
-          </TableCell>
+          <TableCell>{isActive ? "Ongoing" : endDate?.getFullYear()}</TableCell>
           <TableCell className="font-medium">{name}</TableCell>
           <TableCell>{description}</TableCell>
           <TableCell>{mappedTags}</TableCell>
-          <TableCell>
-            <div className="flex">
-              <Hyperlink isBold={false} isItalicized url={url}>
-                {parseHostname(url)}
-              </Hyperlink>
-              <ArrowUpRightIcon className="h-4 w-4" />
-            </div>
-          </TableCell>
+          {url && (
+            <TableCell>
+              <div className="flex">
+                <Hyperlink isBold={false} isItalicized url={url}>
+                  {parseHostname(url)}
+                </Hyperlink>
+                <ArrowUpRightIcon className="h-4 w-4" />
+              </div>
+            </TableCell>
+          )}
         </TableRow>
       );
     });
