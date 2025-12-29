@@ -163,7 +163,7 @@ export default function HomePage() {
           </TypographyHeading>
           {MY_PUBLICATIONS.map((publication) => (
             <AnimatedCard
-              key={publication.title}
+              key={publication.name}
               className="m-5 cursor-pointer pl-10 shadow-none"
               onClick={() => window.open(publication.url, "_blank")}
             >
