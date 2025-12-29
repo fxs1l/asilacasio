@@ -1,8 +1,8 @@
-import { SYMPH_URL, UP_CIRCUIT_URL, UP_EEEI_URL } from "../constants/url";
 import Experience, {
   ExperienceType,
   WorkMode,
 } from "../definitions/experience";
+import { SYMPH_URL, UP_CIRCUIT_URL, UP_EEEI_URL } from "./url";
 
 export const MY_EXPERIENCES: Experience[] = [
   {

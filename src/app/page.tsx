@@ -14,6 +14,7 @@ import { Badge } from "../components/ui/badge";
 import { Button } from "../components/ui/button";
 import { CardContent, CardFooter, CardHeader } from "../components/ui/card";
 import Hyperlink from "../components/ui/hyperlink";
+import { MY_EXPERIENCES } from "../constants/experiences";
 import {
   FIFTH_TAG,
   FIRST_TAG,
@@ -22,16 +23,20 @@ import {
   SECOND_TAG,
   THIRD_TAG,
 } from "../constants/name";
-import { ACADEMIC_PROJECTS, MY_PROJECTS } from "../constants/projects";
+import {
+  ACADEMIC_PROJECTS,
+  MY_PROJECTS,
+  MY_PUBLICATIONS,
+} from "../constants/projects";
 import { GITHUB_URL, LINKEDIN_URL, MAIL_URL, ROOT_URL } from "../constants/url";
-import { MY_EXPERIENCES } from "../definitions/experiences";
 import { Route } from "../definitions/routes";
 import { formatDateRange } from "../utils/date";
 
 export default function HomePage() {
   const router = useRouter();
 
-  const [aboutRef, projectsRef, experienceRef] = [
+  const [aboutRef, publicationsRef, projectsRef, experienceRef] = [
+    useRef(null),
     useRef(null),
     useRef(null),
     useRef(null),
@@ -100,6 +105,15 @@ export default function HomePage() {
           <TypographyHeading className="font-medium" level={4}>
             <button
               onClick={() => {
+                handleClick(publicationsRef);
+              }}
+            >
+              Publications
+            </button>
+          </TypographyHeading>
+          <TypographyHeading className="font-medium" level={4}>
+            <button
+              onClick={() => {
                 handleClick(experienceRef);
               }}
             >
@@ -143,6 +157,32 @@ export default function HomePage() {
           </TypographyHeading>
           <AboutMeArticle />
         </div>
+        <div ref={publicationsRef}>
+          <TypographyHeading className="p-10 pb-5 text-left text-2xl lg:text-4xl">
+            Publications
+          </TypographyHeading>
+          {MY_PUBLICATIONS.map((publication) => (
+            <AnimatedCard
+              key={publication.title}
+              className="m-5 cursor-pointer pl-10 shadow-none"
+              onClick={() => window.open(publication.url, "_blank")}
+            >
+              <CardHeader>
+                <TypographyHeading level={3}>
+                  {publication.name}
+                </TypographyHeading>
+              </CardHeader>
+              <CardContent className="text-foreground">
+                {publication.description}
+              </CardContent>
+              <CardFooter className="flex flex-wrap gap-1 text-lg">
+                {publication.tags.map((tag) => (
+                  <Badge key={tag}>{tag}</Badge>
+                ))}
+              </CardFooter>
+            </AnimatedCard>
+          ))}
+        </div>
         <div className="flex flex-col justify-center" ref={experienceRef}>
           <TypographyHeading className="p-10 pb-5 text-left text-2xl lg:text-4xl">
             Experience
@@ -150,7 +190,7 @@ export default function HomePage() {
           {sortedExperiences.map((experience) => (
             <AnimatedCard
               key={experience.title}
-              className="m-5 pl-10 shadow-none"
+              className="m-5 cursor-pointer pl-10 shadow-none"
             >
               <CardHeader>
                 <span>
@@ -195,7 +235,7 @@ export default function HomePage() {
           {featuredProjects.map((project) => (
             <AnimatedCard
               key={project.name}
-              className="mb-5 ml-5 rounded-lg pl-5"
+              className="mb-5 ml-5 cursor-pointer rounded-lg pl-5"
             >
               <CardHeader>
                 <TypographyHeading level={3}>{project.name}</TypographyHeading>

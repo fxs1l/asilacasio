@@ -9,6 +9,7 @@ interface Props {
   hoverScale?: number;
   tapScale?: number;
   duration?: number;
+  onClick?: () => void;
 }
 export default function AnimatedCard(props: Readonly<Props>) {
   const {
@@ -17,8 +18,10 @@ export default function AnimatedCard(props: Readonly<Props>) {
     tapScale = 1.1,
     hoverScale = 1.05,
     duration = 0.2,
+    onClick,
   } = props;
-  const MotionCard = motion(Card);
+  const MotionCard = motion.create ? motion.create(Card) : motion.div; // fallback if older lib
+
   // const hoverAnimation = {
   //   scale: hoverScale,
   //   border: "4px solid rgba(235, 203, 139, 0.8)",
@@ -29,6 +32,7 @@ export default function AnimatedCard(props: Readonly<Props>) {
 
   return (
     <MotionCard
+      onClick={onClick}
       className={cn(className)}
       whileHover={{
         scale: hoverScale,

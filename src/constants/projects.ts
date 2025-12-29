@@ -1,6 +1,20 @@
 import Project from "../definitions/project";
 import { PERSONAL_WEBSITE_URL } from "./url";
 
+export const MY_PUBLICATIONS: Project[] = [
+  {
+    name: "Traffic-Based Air Pollution Monitoring System for Urban Intersections",
+    url: "https://ieeexplore.ieee.org/document/11270771",
+    description:
+      "Presented at IEEE-ICECS 2025, this paper details the development of a comprehensive air pollution monitoring system that integrates IoT devices, real-time data visualization, and advanced vehicle tracking algorithms to assess and mitigate urban air quality issues.",
+    tags: ["IEEE", "Research Paper", "Air Pollution", "IoT", "Digital Twin"],
+    startDate: new Date("2024-08"),
+    endDate: new Date("2025-11"),
+    isArchived: true,
+    isFeatured: true,
+  },
+];
+
 export const MY_PROJECTS: Project[] = [
   {
     name: "Automatic Smoke Observer",
@@ -80,7 +94,7 @@ export const ACADEMIC_PROJECTS: Project[] = [
     name: "Traffic-Based Air Pollution Monitoring System for Urban Intersections ",
     tags: ["Python", "YOLOv5", "OpenCV", "Raspberry Pi", "NodeJs", "NextJs"],
     url: "https://traffic.upcare.live",
-    isFeatured: true,
+    isFeatured: false,
     startDate: new Date("2024-08"),
     endDate: new Date("2025-05"),
     description:
