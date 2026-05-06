@@ -88,7 +88,6 @@ export default function HomePage() {
               typeSpeed={40}
               backSpeed={40}
               loop
-              loopCount={4}
             />
           </TypographyHeading>
         </div>
