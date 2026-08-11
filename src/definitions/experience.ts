@@ -7,6 +7,7 @@ export type Experience = {
   startDate: Date;
   endDate?: Date;
   isFeatured?: boolean;
+  isActive?: boolean;
 };
 
 export enum ExperienceType {

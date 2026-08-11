@@ -30,7 +30,7 @@ export const MY_EXPERIENCES: Experience[] = [
     },
     mode: WorkMode.ONSITE,
     startDate: new Date("2026-05-13"),
-    endDate: new Date(),
+    isActive: true,
     isFeatured: false,
   },
   {
@@ -44,7 +44,7 @@ export const MY_EXPERIENCES: Experience[] = [
     },
     mode: WorkMode.ONSITE,
     startDate: new Date("2026-02-16"),
-    endDate: new Date(),
+    isActive: true,
     isFeatured: true,
   },
   {
