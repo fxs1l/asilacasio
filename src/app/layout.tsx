@@ -93,7 +93,7 @@ export default function RootLayout(props: Readonly<Props>) {
       <body className="">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >

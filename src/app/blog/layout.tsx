@@ -20,7 +20,7 @@ export default function Layout(props: Readonly<Props>) {
   return (
     <ThemeProvider
       attribute="class"
-      defaultTheme="system"
+      defaultTheme="dark"
       enableSystem
       disableTransitionOnChange
     >
