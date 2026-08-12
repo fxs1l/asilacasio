@@ -90,7 +90,7 @@ export default function Page() {
       </Table>
 
       <div className="flex items-center">
-        <TypographyHeading className="p-10 pl-0 pr-2">
+        <TypographyHeading level={2} className="p-10 pl-0 pr-2">
           Academic-based
         </TypographyHeading>
         <GraduationCapIcon />

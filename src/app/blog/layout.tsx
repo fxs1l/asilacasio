@@ -8,9 +8,11 @@ interface Props {
 }
 
 export const metadata: Metadata = {
-  title: "Blog | Asil Andrei Acasio",
+  title: "Blog",
   description: "Asil's Blog",
-  keywords: "",
+  alternates: {
+    canonical: "/blog",
+  },
 };
 
 export default function Layout(props: Readonly<Props>) {

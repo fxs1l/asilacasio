@@ -175,13 +175,19 @@ export default function HomePage() {
       </header>
       <main className="pt-5 lg:w-1/2 lg:py-24">
         <div ref={aboutRef}>
-          <TypographyHeading className="p-10 pb-5 text-left text-2xl lg:text-4xl">
+          <TypographyHeading
+            level={2}
+            className="p-10 pb-5 text-left text-2xl font-extrabold lg:text-4xl"
+          >
             About
           </TypographyHeading>
           <AboutMeArticle />
         </div>
         <div ref={publicationsRef}>
-          <TypographyHeading className="p-10 pb-5 text-left text-2xl lg:text-4xl">
+          <TypographyHeading
+            level={2}
+            className="p-10 pb-5 text-left text-2xl font-extrabold lg:text-4xl"
+          >
             Publications
           </TypographyHeading>
           {MY_PUBLICATIONS.map((publication) => (
@@ -207,7 +213,10 @@ export default function HomePage() {
           ))}
         </div>
         <div className="flex flex-col justify-center" ref={experienceRef}>
-          <TypographyHeading className="p-10 pb-5 text-left text-2xl lg:text-4xl">
+          <TypographyHeading
+            level={2}
+            className="p-10 pb-5 text-left text-2xl font-extrabold lg:text-4xl"
+          >
             Experience
           </TypographyHeading>
           {sortedExperiences.map((experience) => (
@@ -269,7 +278,10 @@ export default function HomePage() {
           </Button> */}
         </div>
         <div className="flex flex-col justify-center" ref={projectsRef}>
-          <TypographyHeading className="p-10 pb-5 text-left text-2xl lg:text-4xl">
+          <TypographyHeading
+            level={2}
+            className="p-10 pb-5 text-left text-2xl font-extrabold lg:text-4xl"
+          >
             Projects
           </TypographyHeading>
 

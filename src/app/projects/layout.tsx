@@ -6,8 +6,11 @@ interface Props {
 }
 
 export const metadata: Metadata = {
-  title: "Projects | Asil Andrei Acasio",
+  title: "Projects",
   description: "Works by Asil Andrei Acasio",
+  alternates: {
+    canonical: "/projects",
+  },
 };
 
 export default function WorksLayout(props: Readonly<Props>) {
