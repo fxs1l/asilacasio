@@ -1,13 +1,15 @@
-export const formatDateRange = (startDate: Date, endDate?: Date) => {
+const formatMonthYear = (date: Date) => {
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
-    month: "long",
+    month: "short",
   };
-  const startFormatted = startDate.toLocaleDateString("en-US", options);
-  let endFormatted = "Present";
-  if (endDate) {
-    endFormatted = endDate.toLocaleDateString("en-US", options);
-  }
+
+  return date.toLocaleDateString("en-US", options);
+};
+
+export const formatDateRange = (startDate: Date, endDate?: Date) => {
+  const startFormatted = formatMonthYear(startDate);
+  const endFormatted = endDate ? formatMonthYear(endDate) : "Present";
 
   return `${startFormatted} —  ${endFormatted}`;
 };

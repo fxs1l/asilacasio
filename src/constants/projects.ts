@@ -31,7 +31,7 @@ export const MY_PROJECTS: Project[] = [
   {
     name: "Personal Portfolio",
     description:
-      "My personal portfolio website built with Next.js, Tailwind CSS, and animated with Framer Motion. ",
+      "My personal portfolio website built with Next.js and Tailwind CSS. It showcases my projects, experiences, and skills in a clean and responsive design.",
     url: PERSONAL_WEBSITE_URL,
     tags: ["ReactJs", "NextJs", "Tailwind"],
     startDate: new Date("2024-09-23"),
@@ -42,7 +42,7 @@ export const MY_PROJECTS: Project[] = [
     name: "Personal Portfolio (v1)",
     description:
       "Personal portfolio built with only native React modules and pure CSS. It started out as a simple project to learn React.",
-    url: "https://v1.asilacas.io",
+    url: "https://asil-resume-project.web.app/",
     tags: ["ReactJs", "CSS/Sass"],
     startDate: new Date("2024-03-01"),
     endDate: new Date("2024-09-23"),

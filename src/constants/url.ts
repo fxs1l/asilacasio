@@ -1,5 +1,5 @@
 export const ROOT_URL = "/";
-export const PERSONAL_WEBSITE_URL = "https://asilacas.io";
+export const PERSONAL_WEBSITE_URL = "https://asilacasio.com";
 export const UNIVERSITY_URL = "https://www.up.edu.ph/";
 export const UP_EEEI_URL = "https://www.eee.upd.edu.ph/";
 export const SYMPH_URL = "https://www.symph.co/";

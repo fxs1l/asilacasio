@@ -3,7 +3,7 @@
 import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 import { ArrowUpRightIcon, MailIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ReactTyped } from "react-typed";
 import AnimatedCard from "../components/animated/animated-card";
 import AboutMeArticle from "../components/atoms/about-me";
@@ -14,6 +14,7 @@ import { Badge } from "../components/ui/badge";
 import { Button } from "../components/ui/button";
 import { CardContent, CardFooter, CardHeader } from "../components/ui/card";
 import Hyperlink from "../components/ui/hyperlink";
+import { ModeToggle } from "../components/theme-toggle";
 import { MY_EXPERIENCES } from "../constants/experiences";
 import {
   FIFTH_TAG,
@@ -31,6 +32,7 @@ import {
 import { GITHUB_URL, LINKEDIN_URL, MAIL_URL, ROOT_URL } from "../constants/url";
 import { Route } from "../definitions/routes";
 import { formatDateRange } from "../utils/date";
+import { cn } from "../lib/utils";
 
 export default function HomePage() {
   const router = useRouter();
@@ -47,21 +49,59 @@ export default function HomePage() {
     }
   };
 
+  type NavSection = "about" | "publications" | "experience" | "projects";
+  const [activeSection, setActiveSection] = useState<NavSection>("about");
+
+  const navItems: { key: NavSection; label: string; ref: React.RefObject<HTMLElement> }[] = [
+    { key: "about", label: "About", ref: aboutRef },
+    { key: "publications", label: "Publications", ref: publicationsRef },
+    { key: "experience", label: "Experience", ref: experienceRef },
+    { key: "projects", label: "Projects", ref: projectsRef },
+  ];
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const mostVisible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (!mostVisible) return;
+        const match = navItems.find(
+          (item) => item.ref.current === mostVisible.target,
+        );
+        if (match) setActiveSection(match.key);
+      },
+      { rootMargin: "-20% 0px -70% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] },
+    );
+
+    navItems.forEach((item) => {
+      if (item.ref.current) observer.observe(item.ref.current);
+    });
+
+    return () => observer.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const featuredProjects = [...ACADEMIC_PROJECTS, ...MY_PROJECTS].filter(
     (project) => project.isFeatured,
   );
+
+  const compareByRecency = (
+    a: { startDate: Date; endDate?: Date },
+    b: { startDate: Date; endDate?: Date },
+  ) => {
+    const aEnd = a.endDate?.getTime() ?? Number.POSITIVE_INFINITY;
+    const bEnd = b.endDate?.getTime() ?? Number.POSITIVE_INFINITY;
+    return bEnd - aEnd || b.startDate.getTime() - a.startDate.getTime();
+  };
+
   const sortedExperiences = [...MY_EXPERIENCES]
     .filter((experience) => experience.isFeatured)
-    .sort((a, b) => {
-      if (b.endDate && a.endDate) {
-        return (
-          b.endDate.getTime() - a.endDate.getTime() ||
-          b.startDate.getTime() - a.startDate.getTime()
-        );
-      } else {
-        return b.startDate.getTime() - a.startDate.getTime();
-      }
-    });
+    .map((experience) => ({
+      ...experience,
+      positions: [...experience.positions].sort(compareByRecency),
+    }))
+    .sort((a, b) => compareByRecency(a.positions[0], b.positions[0]));
 
   return (
     <>
@@ -92,42 +132,26 @@ export default function HomePage() {
           </TypographyHeading>
         </div>
         <div className="hidden p-10 lg:block">
-          <TypographyHeading level={4}>
-            <button
-              onClick={() => {
-                handleClick(aboutRef);
-              }}
+          {navItems.map((item) => (
+            <TypographyHeading
+              key={item.key}
+              className={cn(
+                "transition-colors duration-300 ease-out",
+                activeSection === item.key
+                  ? "font-bold text-[rgb(var(--card-glow))]"
+                  : "font-medium",
+              )}
+              level={4}
             >
-              About
-            </button>
-          </TypographyHeading>
-          <TypographyHeading className="font-medium" level={4}>
-            <button
-              onClick={() => {
-                handleClick(publicationsRef);
-              }}
-            >
-              Publications
-            </button>
-          </TypographyHeading>
-          <TypographyHeading className="font-medium" level={4}>
-            <button
-              onClick={() => {
-                handleClick(experienceRef);
-              }}
-            >
-              Experience
-            </button>
-          </TypographyHeading>
-          <TypographyHeading className="font-medium" level={4}>
-            <button
-              onClick={() => {
-                handleClick(projectsRef);
-              }}
-            >
-              Projects
-            </button>
-          </TypographyHeading>
+              <button
+                onClick={() => {
+                  handleClick(item.ref);
+                }}
+              >
+                {item.label}
+              </button>
+            </TypographyHeading>
+          ))}
           <TypographyHeading className="font-medium" level={4}>
             <Hyperlink isBold={false} url={Route.BLOG}>
               Blog
@@ -163,7 +187,7 @@ export default function HomePage() {
           {MY_PUBLICATIONS.map((publication) => (
             <AnimatedCard
               key={publication.name}
-              className="m-5 cursor-pointer pl-10 shadow-none"
+              className="m-5 cursor-pointer shadow-none"
               onClick={() => window.open(publication.url, "_blank")}
             >
               <CardHeader>
@@ -188,22 +212,12 @@ export default function HomePage() {
           </TypographyHeading>
           {sortedExperiences.map((experience) => (
             <AnimatedCard
-              key={experience.title}
-              className="m-5 cursor-pointer pl-10 shadow-none"
+              key={experience.company?.name ?? experience.positions[0].title}
+              className="m-5 cursor-pointer shadow-none"
             >
               <CardHeader>
-                <span>
-                  {" "}
-                  <i>
-                    {formatDateRange(experience.startDate, experience.endDate)}
-                  </i>
-                </span>
-                <TypographyHeading level={3}>
-                  {experience.title}
-                </TypographyHeading>
-
                 {experience.company && (
-                  <TypographyHeading level={4}>
+                  <TypographyHeading level={3}>
                     <Hyperlink url={experience.company.url} isBold={false}>
                       {experience.company.name}
                     </Hyperlink>
@@ -211,10 +225,38 @@ export default function HomePage() {
                 )}
               </CardHeader>
 
-              <CardContent className="text-foreground">
-                <TypographyParagraph>
-                  {experience.description}
-                </TypographyParagraph>
+              <CardContent className="flex flex-col text-foreground">
+                {experience.positions.map((position, posIndex) => (
+                  <div key={position.title} className="flex gap-4">
+                    <div className="flex flex-col items-center">
+                      <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-[rgb(var(--card-glow))]" />
+                      {posIndex !== experience.positions.length - 1 && (
+                        <span className="w-px flex-1 bg-border" />
+                      )}
+                    </div>
+                    <div
+                      className={cn(
+                        posIndex !== experience.positions.length - 1 &&
+                          "pb-4",
+                      )}
+                    >
+                      <span>
+                        <i>
+                          {formatDateRange(
+                            position.startDate,
+                            position.endDate,
+                          )}
+                        </i>
+                      </span>
+                      <TypographyHeading level={4}>
+                        {position.title}
+                      </TypographyHeading>
+                      <TypographyParagraph>
+                        {position.description}
+                      </TypographyParagraph>
+                    </div>
+                  </div>
+                ))}
               </CardContent>
             </AnimatedCard>
           ))}
@@ -234,7 +276,12 @@ export default function HomePage() {
           {featuredProjects.map((project) => (
             <AnimatedCard
               key={project.name}
-              className="mb-5 ml-5 cursor-pointer rounded-lg pl-5"
+              className="m-5 cursor-pointer rounded-lg shadow-none"
+              onClick={() => {
+                if (project.url) {
+                  window.open(project.url, "_blank");
+                }
+              }}
             >
               <CardHeader>
                 <TypographyHeading level={3}>{project.name}</TypographyHeading>
@@ -259,7 +306,7 @@ export default function HomePage() {
         </div>
         <Footer />
       </main>
-      {/* <ModeToggle /> */}
+      <ModeToggle />
     </>
   );
 }

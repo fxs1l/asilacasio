@@ -1,13 +1,17 @@
-export type Experience = {
+export type Position = {
   title: string;
-  company?: Company;
   description: string;
   type: ExperienceType;
   mode?: WorkMode;
   startDate: Date;
   endDate?: Date;
-  isFeatured?: boolean;
   isActive?: boolean;
+};
+
+export type Experience = {
+  company?: Company;
+  positions: Position[];
+  isFeatured?: boolean;
 };
 
 export enum ExperienceType {

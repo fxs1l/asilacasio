@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import React from "react";
 import { cn } from "../../lib/utils";
 import { Card } from "../ui/card";
@@ -20,30 +19,23 @@ export default function AnimatedCard(props: Readonly<Props>) {
     duration = 0.2,
     onClick,
   } = props;
-  const MotionCard = motion.create ? motion.create(Card) : motion.div; // fallback if older lib
-
-  // const hoverAnimation = {
-  //   scale: hoverScale,
-  //   border: "4px solid rgba(235, 203, 139, 0.8)",
-  //   boxShadow: "0px 0px 15px rgba(235, 203, 139, 0.8)",
-  //   transition: { duration: duration, ease: "easeInOut" },
-  //   color: "rgb(235, 203, 139)",
-  // };
 
   return (
-    <MotionCard
+    <Card
       onClick={onClick}
-      className={cn(className)}
-      whileHover={{
-        scale: hoverScale,
-        border: "4px solid rgba(143, 188, 187, 0.8)",
-        boxShadow: "0px 0px 15px rgba(143, 188, 187, 0.9)",
-        transition: { duration: duration, ease: "easeInOut" },
-        color: "rgb(235, 203, 139)",
-      }}
-      whileTap={{ scale: tapScale }}
+      className={cn(
+        "border-4 border-transparent text-inherit transition-[transform,box-shadow,border-color,color] ease-in-out hover:scale-[var(--hover-scale)] hover:border-[rgba(var(--card-glow),0.8)] hover:text-[rgb(var(--card-glow))] hover:shadow-[0px_0px_15px_rgba(var(--card-glow),0.9)] active:scale-[var(--tap-scale)]",
+        className,
+      )}
+      style={
+        {
+          "--hover-scale": hoverScale,
+          "--tap-scale": tapScale,
+          transitionDuration: `${duration * 1000}ms`,
+        } as React.CSSProperties
+      }
     >
       {children}
-    </MotionCard>
+    </Card>
   );
 }
